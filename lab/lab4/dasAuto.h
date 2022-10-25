@@ -4,7 +4,7 @@
 class dasAuto
 {
 private:
-    /* data */
+    
 public:
     dasAuto(/* args */);
     ~dasAuto();
