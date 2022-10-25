@@ -4,7 +4,7 @@
 class dasAuto
 {
 private:
-    
+    /* horsePower */
 public:
     dasAuto(/* args */);
     ~dasAuto();
