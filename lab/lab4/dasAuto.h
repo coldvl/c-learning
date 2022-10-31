@@ -10,6 +10,7 @@ private:
     string model;
     int maxVelocity;
 public:
+    dasAuto();
     void getHorsepower();
     void getModel();
     void getMaxVelocity();
@@ -17,37 +18,15 @@ public:
     void getEngineLiters();
     string engine;
     int litersPerKilometer;
-    dasAuto(/* args */);
-    ~dasAuto();
+    void giveHorsepower();
+    void giveModel();
+    void giveMaxVelocity();
+    void giveColor();
+    void giveEngineLiters();
 protected:
     string color;
     int engineLiters;
 };
-
-void dasAuto::getHorsepower()
-{
-    std::cout << horsepower;
-}
-
-void dasAuto::getModel()
-{
-    cout << model;
-}
-
-void dasAuto::getMaxVelocity()
-{
-    cout << maxVelocity;
-}
-
-void dasAuto::getColor()
-{
-    cout << color;
-}
-
-void dasAuto::getEngineLiters()
-{
-    cout << engineLiters;
-}
 
 dasAuto::~dasAuto()
 {
