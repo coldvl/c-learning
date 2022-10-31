@@ -1,6 +1,6 @@
 #include "dasAuto.h"
 
-dasAuto::dasAuto()
-{
-    //ctor
+int main() {
+    dasAuto car;
+    car.getColor;
 }
