@@ -11,6 +11,7 @@ private:
     int maxVelocity;
 public:
     dasAuto();
+    ~dasAuto();
     void getHorsepower();
     void getModel();
     void getMaxVelocity();
@@ -27,6 +28,10 @@ protected:
     string color;
     int engineLiters;
 };
+
+dasAuto::dasAuto(/* args */)
+{
+}
 
 dasAuto::~dasAuto()
 {
