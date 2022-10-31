@@ -8,4 +8,7 @@ int main() {
     car.giveHorsepower();
     car.giveMaxVelocity();
     car.getColor();
+    car.getModel();
+    car.getHorsepower();
+    car.getMaxVelocity();
 }
