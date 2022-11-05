@@ -1,8 +1,8 @@
 #ifndef DASAUTO_H
 #define DASAUTO_H
 #include <iostream>
+#include "string.h"
 using namespace std;
-
 class dasAuto
 {
 private:
@@ -35,6 +35,7 @@ dasAuto::dasAuto(/* args */)
 
 dasAuto::~dasAuto()
 {
+    cout << "Destructor is called!";
 }
 
 #endif
