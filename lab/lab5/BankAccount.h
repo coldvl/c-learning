@@ -7,16 +7,23 @@ using namespace std;
 class BankAccount
 {
 private:
-    /* data */
+    int customerId;
+    string ownerName;
+    float balance;
 public:
-    BankAccount(/* args */);
+    void createAccount();
+    void topUpBalance();
+    void withdrawCash();
+    void showAccount();
+    BankAccount();
     ~BankAccount();
 };
 
-BankAccount::BankAccount(/* args */)
+BankAccount::BankAccount()
 {
 }
 
 BankAccount::~BankAccount()
 {
 }
+#endif
