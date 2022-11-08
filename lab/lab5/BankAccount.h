@@ -2,14 +2,20 @@
 #define BANKACCOUNT_H
 #include <iostream>
 #include "string.h"
+#include "Bank.h"
 using namespace std;
 
 class BankAccount
 {
 private:
+    int i=0;
     int customerId;
     string ownerName;
     float balance;
+    int accArrayOfId[30];
+    string accArrayOfName[30];
+    float accArrayOfBalance[30];
+    
 public:
     void createAccount();
     void topUpBalance();
@@ -17,6 +23,7 @@ public:
     void showAccount();
     BankAccount();
     ~BankAccount();
+    friend class Bank;
 };
 
 BankAccount::BankAccount()

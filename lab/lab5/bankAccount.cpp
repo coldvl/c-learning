@@ -1,15 +1,21 @@
 #include <iostream>
 #include "BankAccount.h"
+#include "Bank.h"
 using namespace std;
 
 void BankAccount::createAccount()
 {
     cout << "Enter Customer ID:" << endl;
     cin >> customerId;
+    this->accArrayOfId[i] = customerId;
     cout << "Enter owner name:" << endl;
     cin >> ownerName;
+    accArrayOfName[i] = ownerName;
     cout << "Enter balance:" << endl;
     cin >> balance;
+    accArrayOfBalance[i] = balance;
+    
+    i = i + 1;
     
 }
 

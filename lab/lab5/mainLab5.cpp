@@ -1,4 +1,5 @@
 #include "bankAccount.cpp"
+#include "Bank.cpp"
 
 int main() {
     BankAccount account1;
@@ -6,5 +7,7 @@ int main() {
     account1.topUpBalance();
     account1.withdrawCash();
     account1.showAccount();
+    Bank list;
+    list.sortAccounts();
 
 }
