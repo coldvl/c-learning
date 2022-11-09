@@ -8,19 +8,18 @@ using namespace std;
 class BankAccount
 {
 private:
-    int i=0;
     int customerId;
     string ownerName;
     float balance;
-    int accArrayOfId[30];
-    string accArrayOfName[30];
-    float accArrayOfBalance[30];
     
 public:
     void createAccount();
     void topUpBalance();
     void withdrawCash();
     void showAccount();
+    float getBalance();
+    int getId();
+    string getName();
     BankAccount();
     ~BankAccount();
     friend class Bank;

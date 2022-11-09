@@ -7,15 +7,11 @@ void BankAccount::createAccount()
 {
     cout << "Enter Customer ID:" << endl;
     cin >> customerId;
-    this->accArrayOfId[i] = customerId;
     cout << "Enter owner name:" << endl;
     cin >> ownerName;
-    accArrayOfName[i] = ownerName;
     cout << "Enter balance:" << endl;
     cin >> balance;
-    accArrayOfBalance[i] = balance;
     
-    i = i + 1;
     
 }
 
@@ -42,4 +38,19 @@ void BankAccount::showAccount()
     cout << "Customer ID: " << customerId << endl;
     cout << "Owner name: " << ownerName << endl;
     cout << "Balance: " << balance << endl;
+}
+
+float BankAccount::getBalance()
+{
+    return balance;
+}
+
+int BankAccount::getId()
+{
+    return customerId;
+}
+
+string BankAccount::getName()
+{
+    return ownerName;
 }

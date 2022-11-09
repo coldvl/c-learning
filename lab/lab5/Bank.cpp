@@ -42,12 +42,21 @@ void Bank::bubbleSort(float arr[], int n)
     printf("\n"); 
 } 
 */
-void Bank::sortAccounts()
+
+void Bank::sortAccounts(class BankAccount arr[], int n)
 {
-    int i, j, n=30; 
-    int temp[30] = {arrayOfBalance[30]};
-    bubbleSort(arrayOfBalance, 30);
-    for (i = 0; i < n-1; i++)         
+    int i, j; 
+    float arrayOfBalance[n];
+    int arrayOfId[n];
+    string arrayOfName[n];
+
+    for (i = 0; i < n; i++)
+        arrayOfBalance[i]=arr[i].getBalance();
+    
+    bubbleSort(arrayOfBalance, n);
+    for (i=0; i < n; i++) 
+        cout << arrayOfBalance[i] << "\n";
+ /*   for (i = 0; i < n-1; i++)         
        for (j = 0; j < n-1; j++)  
            if (temp[j] == arrayOfBalance[i]) 
               swapInt(&arrayOfId[j], &arrayOfId[i]);
@@ -56,4 +65,7 @@ void Bank::sortAccounts()
     // printArray(arrayOfId, 30);
     // printArray(arrayOfName, 30);
 
+}
+
+*/
 }
