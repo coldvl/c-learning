@@ -7,17 +7,15 @@ using namespace std;
 
 class Bank
 {
+    friend class BankAccount;
 private:
-    
+    BankAccount account[2];
 public:
     Bank();
     ~Bank();
-    void sortAccounts(class BankAccount arr[], int n);    
-    void bubbleSort(float arr[], int n);
-    void swap(float *xp, float *yp);
-    void swapStr(string *xp, string *yp);
-    void swapInt(int *xp, int *yp);
-    friend class BankAccount;
+    void sortAccounts(int n);    
+    void bubbleSort(int n);
+    void accountCreation();
 };
 
 Bank::Bank()

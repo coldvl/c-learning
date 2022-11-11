@@ -2,7 +2,6 @@
 #define BANKACCOUNT_H
 #include <iostream>
 #include "string.h"
-#include "Bank.h"
 using namespace std;
 
 class BankAccount
@@ -17,9 +16,6 @@ public:
     void topUpBalance();
     void withdrawCash();
     void showAccount();
-    float getBalance();
-    int getId();
-    string getName();
     BankAccount();
     ~BankAccount();
     friend class Bank;

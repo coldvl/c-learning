@@ -39,18 +39,3 @@ void BankAccount::showAccount()
     cout << "Owner name: " << ownerName << endl;
     cout << "Balance: " << balance << endl;
 }
-
-float BankAccount::getBalance()
-{
-    return balance;
-}
-
-int BankAccount::getId()
-{
-    return customerId;
-}
-
-string BankAccount::getName()
-{
-    return ownerName;
-}
