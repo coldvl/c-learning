@@ -5,8 +5,8 @@ using namespace std;
 
 int main()
 {
-    FlexArray flex1(7);
-    FlexArray flex2(9);
+    FlexArray flex1(3);
+    FlexArray flex2(2);
     FlexArray flexSum = flex1 + flex2;
     flexSum *= 2;
     std::cout << flexSum << std::endl;
