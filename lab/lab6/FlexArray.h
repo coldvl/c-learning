@@ -55,26 +55,24 @@ FlexArray::~FlexArray()
 
 FlexArray FlexArray::operator+(const FlexArray &d1)
 {
-    int *p = new int[d1.m_length + m_length];
+    FlexArray flexTemp(d1.m_length + m_length);
     for (int i = 0; i < m_length; ++i)
     {
-        p[i]=arr[i];   // переносимо данні       
+        flexTemp.arr[i]=arr[i];   // переносимо данні       
     }
 
-    for (int i = d1.m_length; i < d1.m_length + m_length; ++i)
+    for (int i = (d1.m_length + m_length); i >= m_length; i--)
     {
-        p[i]=d1.arr[i-d1.m_length];   // переносимо данні       
+        flexTemp.arr[i]=d1.arr[i-m_length];   // переносимо данні       
     }
 
-    for (int i = 0; i < d1.m_length + m_length; ++i)
+    /*for (int i = 0; i < d1.m_length + m_length; ++i)
     {
         cout << p[i] << "\t";
         
-    }
+    }*/
 
-    return* p;
-    delete[] p;
-    p = nullptr;
+    return flexTemp;
 }
 
 FlexArray FlexArray::operator*=(int a) //тут неявний параметр, на який вказує вказівник *this
@@ -103,15 +101,6 @@ FlexArray FlexArray::operator*=(int a) //тут неявний параметр,
     p = nullptr;
 }
 
-void FlexArray::operator=(int *ar)
-{
-    for (int i = 0; i < m_length; i++)
-    {
-         arr[i]=ar[i];
-        
-    } 
-}
-
 void FlexArray::operator=(const FlexArray &d1)
 {
     m_length = d1.m_length;
@@ -135,7 +124,7 @@ std::ostream& operator<<(std::ostream& out, const FlexArray &d1)
             std::cout << "\n";
     }
     cout << "\n";
-    cout << "I just printed an array of integers of length " << d1.m_length;
+    cout << "I've just printed an array of integers of length " << d1.m_length;
 	return out;
 }
 
