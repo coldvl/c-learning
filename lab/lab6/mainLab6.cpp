@@ -1,15 +1,18 @@
-#include "FlexArray.cpp"
-// #include "FlexArray.h"
+#include "FlexArray.h"
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
- FlexArray dollars1(7);
- FlexArray dollars2(9);
- FlexArray dollarsSum = dollars1 + dollars2;
- std::cout << "I have " << dollarsSum.getLength() << " dollars." << std::endl;
+    FlexArray flex1(7);
+    FlexArray flex2(9);
+    FlexArray flexSum = flex1 + flex2;
+    flexSum *= 2;
+    std::cout << flexSum << std::endl;
+    flex1 = flex2;
+    std::cout << flex1 << std::endl;
+
     
     
  return 0;
