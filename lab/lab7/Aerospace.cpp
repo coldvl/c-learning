@@ -33,7 +33,7 @@ public:
  
 	friend std::ostream& operator<<(std::ostream &out, const PassangerPlane &a)
 	{
-		out << "PassangerPlane (" << a.getName() << ", " << a.getColor() << ", " << a.getSeats() << ")\n";
+		out << "PassangerPlane \t" << "Model:" << a.getName() << "\t" << "Color: " << a.getColor() << "\t" << "Seats: " << a.getSeats() << "\n";
 		return out;
 	}
 };
@@ -48,7 +48,7 @@ public:
  
 	friend std::ostream& operator<<(std::ostream &out, const SportPlane &b)
 	{
-		out << "SportPlane (" << b.getName() << ", " << b.getColor() << ")\n";
+		out << "SportPlane \t" << "Model:" << b.getName() << "\t" << "Color: " << b.getColor() << "\n";
 		return out;
 	}
  
@@ -64,7 +64,7 @@ public:
  
 	friend std::ostream& operator<<(std::ostream &out, const Glider &b)
 	{
-		out << "Glider (" << b.getName() << ", " << b.getColor() << ")\n";
+		out << "Glider \t" << "Model:" << b.getName() << "\t" << "Color: " << b.getColor() << "\n";
 		return out;
 	}
  
@@ -80,7 +80,7 @@ public:
  
 	friend std::ostream& operator<<(std::ostream &out, const Fighter &b)
 	{
-		out << "Fithter (" << b.getName() << ", " << b.getColor() << ")\n";
+		out << "Fithter \t" << "Model:" << b.getName() << "\t" << "Color: " << b.getColor() << "\n";
 		return out;
 	}
  
@@ -101,7 +101,7 @@ public:
 
 	friend std::ostream& operator<<(std::ostream &out, const Bomber &b)
 	{
-		out << "Bomber (" << b.getName() << ", " << b.getColor() << ", " << b.getMaxWeightCarrying() << ")\n";
+		out << "Bomber \t" << "Model:" << b.getName() << "\t" << "Color: " << b.getColor() << "\t" << "Max carrying weight: " << b.getMaxWeightCarrying() << ")\n";
 		return out;
 	}
  
