@@ -70,6 +70,22 @@ public:
  
 };
 
+class Fighter : public Aerospace
+{
+public:
+	Fighter(std::string name, std::string color)
+		:Aerospace(name, color)
+	{
+	}
+ 
+	friend std::ostream& operator<<(std::ostream &out, const Fighter &b)
+	{
+		out << "Fithter (" << b.getName() << ", " << b.getColor() << ")\n";
+		return out;
+	}
+ 
+};
+
 int main()
 {
 	const PassangerPlane a("Airbus A350", "black", 348);
@@ -80,6 +96,9 @@ int main()
 
     const Glider c("Flugzeugbau DG-800", "white");
 	std::cout << c;
+
+	const Fighter d("Raptor F-22", "black");
+	std::cout << d;
  
 	return 0;
 }
