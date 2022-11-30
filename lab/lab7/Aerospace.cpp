@@ -86,6 +86,27 @@ public:
  
 };
 
+class Bomber : public Aerospace
+{
+private:
+int m_maxWeightCarrying;
+
+public:
+	Bomber(std::string name, std::string color, int maxWeightCarrying)
+		:Aerospace(name, color), m_maxWeightCarrying(maxWeightCarrying)
+	{
+	}
+	
+	int getMaxWeightCarrying() const { return m_maxWeightCarrying; }
+
+	friend std::ostream& operator<<(std::ostream &out, const Bomber &b)
+	{
+		out << "Bomber (" << b.getName() << ", " << b.getColor() << ", " << b.getMaxWeightCarrying() << ")\n";
+		return out;
+	}
+ 
+};
+
 int main()
 {
 	const PassangerPlane a("Airbus A350", "black", 348);
@@ -99,6 +120,9 @@ int main()
 
 	const Fighter d("Raptor F-22", "black");
 	std::cout << d;
+
+	const Bomber e("Boeing B-52 Stratofortress", "black", 32000);
+	std::cout << e;
  
 	return 0;
 }
