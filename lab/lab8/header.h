@@ -12,6 +12,8 @@ struct Node {
  // Define a binary search tree.
 class BST {
     public:
+        int height = 0;
+        int j=0;
         // Constructor.
         BST() : root_(nullptr) {}
         // Insert a new node into the tree.
@@ -20,11 +22,87 @@ class BST {
         void print() {
         print(root_);
         }
-        int get_left() {
-            return count_left;
+        int treeHeight() {
+            Node* current = root_;
+            while (current != nullptr) {
+                if (current->left != nullptr) {
+                    current = current->left;
+                    height++;
+                }
+                else if (current->right != nullptr) {
+                    current = current->right;
+                    height++;
+                }
+                else {
+                    break;
+                }
+            }
+            cout << "Height: " << height << endl;
+            return height;
         }
-        int get_right() {
-            return count_right;
+
+        void deleteNode(int data) {
+            Node* current = root_;
+            Node* parent = nullptr;
+            while (current != nullptr) {
+                if (data < current->data) {
+                    parent = current;
+                    current = current->left;
+                }
+                else if (data > current->data) {
+                    parent = current;
+                    current = current->right;
+                }
+                else {
+                    if (current->left == nullptr && current->right == nullptr) {
+                        if (parent->left == current) {
+                            parent->left = nullptr;
+                        }
+                        else {
+                            parent->right = nullptr;
+                        }
+                        delete current;
+                        break;
+                    }
+                    else if (current->left == nullptr) {
+                        if (parent->left == current) {
+                            parent->left = current->right;
+                        }
+                        else {
+                            parent->right = current->right;
+                        }
+                        delete current;
+                        break;
+                    }
+                    else if (current->right == nullptr) {
+                        if (parent->left == current) {
+                            parent->left = current->left;
+                        }
+                        else {
+                            parent->right = current->left;
+                        }
+                        delete current;
+                        break;
+                    }
+                    else {
+                        Node* temp = current->right;
+                        Node* tempParent = current;
+                        while (temp->left != nullptr) {
+                            tempParent = temp;
+                            temp = temp->left;
+                        }
+                        if (tempParent->left == temp) {
+                            tempParent->left = temp->right;
+                        }
+                        else {
+                            tempParent->right = temp->right;
+                        }
+                        current->data = temp->data;
+                        delete temp;
+                        break;
+                    }
+                }
+            }
         }
     private:
         // Print the tree starting at the given node.
@@ -36,24 +114,23 @@ class BST {
     //cout << "\t";
     print(node->left);
      // Print the current node.
-    
+    for (int i=height-j; i>0; i--)
+        cout << "\t";
+    j++;
     cout << node->data << endl;
+    
      // Print the right subtree.
     //cout << "\t";
     print(node->right);
   }
         // The root of the tree.
         Node* root_;
-        int count_left = 0;
-    int count_right = 0;
 };
 
 void BST::insert(int data) {
     // If the tree is empty, create a new node as the root.
     if (root_ == nullptr) {
       root_ = new Node(data);
-      count_left = 1;
-      count_right = 1;
     }
     else {
       // Start at the root of the tree.
@@ -67,7 +144,6 @@ void BST::insert(int data) {
           if (current->left == nullptr) {
             current->left = new Node(data);
             if (current->right == nullptr) {
-               count_left++;
            }
                
             break;
@@ -84,7 +160,6 @@ void BST::insert(int data) {
           if (current->right == nullptr) {
                current->right = new Node(data);
                if (current->left == nullptr) {
-               count_right++;
                }
             break;
           }

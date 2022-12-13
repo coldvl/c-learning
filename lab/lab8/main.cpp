@@ -3,13 +3,12 @@
 
 using namespace std;
 
-
-
- int main() {
+int main() {
    // Create a binary search tree.
    BST tree;
 
    // Insert some values into the tree.
+   tree.treeHeight();
    tree.insert(5);
    tree.insert(3);
    tree.insert(7);
@@ -17,9 +16,9 @@ using namespace std;
    tree.insert(4);
    tree.insert(6);
    tree.insert(8);
+   tree.deleteNode(5);
 
    // Print the tree.
    tree.print();
-   cout << "Left: " << tree.get_left() << endl;
-   cout << "Right: " << tree.get_right() << endl;
- }
+   //tree.treeTraverse();
+}
