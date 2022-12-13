@@ -21,6 +21,11 @@ class BinarySearchTree {
         void deleteNodesBelowZeroByX();
         void preOrder();
         void print(Node *node);
+        void printOnLevel(int level);
+        void printOnLevel(Node *node, int level);
+        void printYaboveZero();
+        void printYaboveZero(Node *node);
+        void printHorizontal();
         int treeHeight();
         BinarySearchTree();
         ~BinarySearchTree();
@@ -76,9 +81,48 @@ void BinarySearchTree::print(Node *node) {
     }
 }
 
+void BinarySearchTree::printOnLevel(int level) {
+    printOnLevel(root, level);
+}
+
+void BinarySearchTree::printOnLevel(Node *node, int level) {
+    if (node == nullptr) {
+        return;
+    }
+    if (level == 1) {
+        cout << node->data_x << " " << node->data_y << "\t";
+    }
+    else if (level > 1) {
+        printOnLevel(node->left, level - 1);
+        printOnLevel(node->right, level - 1);
+    }
+    cout << endl;
+}
+
+void BinarySearchTree::printHorizontal() {
+    int height = treeHeight();
+    for (int i = 1; i <= height; i++) {
+        printOnLevel(i);
+    }
+}
+
+void BinarySearchTree::printYaboveZero() {
+    printYaboveZero(root);
+}
+
+void BinarySearchTree::printYaboveZero(Node *node) {
+    if (node != nullptr) {
+        printYaboveZero(node->left);
+        if (node->data_y > 0) {
+            cout << node->data_x << " " << node->data_y << endl;
+        }
+        printYaboveZero(node->right);
+    }
+}
+
 int BinarySearchTree::treeHeight() {
     Node* current = root;
-    int height = 0;
+    int height = 1;
     while (current != nullptr) {
         if (current->left != nullptr) {
             current = current->left;
@@ -237,11 +281,15 @@ int main() {
     tree.insert(-2, 5);
     tree.insert(10, -4);
     tree.insert(3, 2);
-    tree.insert(-4, 1);
+    tree.insert(-5, 10);
     tree.insert(-5, -3);
     tree.insert(2, 3);
     tree.insert(4, 4);
     tree.print();
+    tree.printHorizontal();
+    cout << endl;
+    cout << "Print on level 2" << endl;
+    tree.printOnLevel(2);
     cout << endl;
     cout << "Delete nodes below zero by Y" << endl;
     tree.deleteNodesBelowZeroByY();
@@ -252,4 +300,9 @@ int main() {
     tree.print();
     tree.treeHeight();
     tree.preOrder();
+    cout << endl;
+    cout << "Print nodes with Y above zero" << endl;
+    tree.printYaboveZero();
+
+    return 0;
 }
