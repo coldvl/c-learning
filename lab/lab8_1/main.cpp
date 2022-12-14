@@ -7,26 +7,28 @@ struct Node {
   float data_y;
   Node* left;
   Node* right;
+  Node* parent;
    Node(float x, float y) : data_x(x), data_y(y), left(nullptr), right(nullptr) {}
 };
  // Define a binary search tree.
 class BinarySearchTree {
     private:
         Node *root;
+        int nodesQuantity;
+        int height =1;
     public:
         void insert(float x, float y);
         void print();
         void deleteNode(float x, float y);
         void deleteNodesBelowZeroByY();
         void deleteNodesBelowZeroByX();
-        void preOrder();
         void print(Node *node);
-        void printOnLevel(int level);
-        void printOnLevel(Node *node, int level);
         void printYaboveZero();
-        void printYaboveZero(Node *node);
-        void printHorizontal();
+        void printYaboveZero(Node *node);;
         int treeHeight();
+        void treeHeight(Node *node);
+        void switchToRight(Node *node);
+        void switchToLeft(Node *node);
         BinarySearchTree();
         ~BinarySearchTree();
 };
@@ -49,6 +51,7 @@ void BinarySearchTree::insert(float x, float y) {
         while (true) {
             if (y < current->data_y) {
                 if (current->left == nullptr) {
+                    //node->parent = current;
                     current->left = node;
                     break;
                 }
@@ -58,6 +61,7 @@ void BinarySearchTree::insert(float x, float y) {
             }
             else {
                 if (current->right == nullptr) {
+                    //node->parent = current;
                     current->right = node;
                     break;
                 }
@@ -70,41 +74,22 @@ void BinarySearchTree::insert(float x, float y) {
 }
 
 void BinarySearchTree::print() {
+    nodesQuantity = 0;
     print(root);
+    cout << "Nodes quantity: " << nodesQuantity << endl;
 }
 
 void BinarySearchTree::print(Node *node) {
     if (node != nullptr) {
         print(node->left);
         cout << node->data_x << " " << node->data_y << endl;
+        nodesQuantity++;
         print(node->right);
     }
 }
 
-void BinarySearchTree::printOnLevel(int level) {
-    printOnLevel(root, level);
-}
 
-void BinarySearchTree::printOnLevel(Node *node, int level) {
-    if (node == nullptr) {
-        return;
-    }
-    if (level == 1) {
-        cout << node->data_x << " " << node->data_y << "\t";
-    }
-    else if (level > 1) {
-        printOnLevel(node->left, level - 1);
-        printOnLevel(node->right, level - 1);
-    }
-    cout << endl;
-}
 
-void BinarySearchTree::printHorizontal() {
-    int height = treeHeight();
-    for (int i = 1; i <= height; i++) {
-        printOnLevel(i);
-    }
-}
 
 void BinarySearchTree::printYaboveZero() {
     printYaboveZero(root);
@@ -120,24 +105,45 @@ void BinarySearchTree::printYaboveZero(Node *node) {
     }
 }
 
+void BinarySearchTree::switchToLeft(Node *node) {
+    if (node->left != nullptr) {
+        node = node->left;
+        cout << node->data_x << " " << node->data_y << endl;
+    }
+}
+
+void BinarySearchTree::switchToRight(Node *node) {
+    if (node->right != nullptr) {
+        node = node->right;
+        cout << node->data_x << " " << node->data_y << endl;
+    }
+}
+
 int BinarySearchTree::treeHeight() {
     Node* current = root;
-    int height = 1;
-    while (current != nullptr) {
-        if (current->left != nullptr) {
-            current = current->left;
-            height++;
-        }
-        else if (current->right != nullptr) {
-            current = current->right;
-            height++;
-        }
-        else {
-            break;
-        }
-    }
-    cout << "Height: " << height << endl;
+    switchToLeft(current);
+    current = root;
+    switchToRight(current);
+    
+    
     return height;
+
+}
+
+void BinarySearchTree::treeHeight(Node *node) {
+    if (node->left != nullptr) {
+        node = node->left;
+        height++;
+        treeHeight(node);
+    }
+    else if (node->right != nullptr) {
+        node = node->right;
+        height++;
+        treeHeight(node);
+    }
+    else {
+        return;
+    }
 }
 
 void BinarySearchTree::deleteNode(float x, float y) {
@@ -202,24 +208,6 @@ void BinarySearchTree::deleteNode(float x, float y) {
     }
 }
 
-
-void BinarySearchTree::preOrder() {
-    Node* current = root;
-    cout << current->data_x << " " << current->data_y << endl;
-    while (current != nullptr) {
-        if (current->left != nullptr) {
-            current = current->left;
-            cout << current->data_x << " " << current->data_y << endl;
-        }
-        else if (current->right != nullptr) {
-            current = current->right;
-            cout << current->data_x << " " << current->data_y << endl;
-        }
-        else {
-            break;
-        }
-    }
-}
 
 void BinarySearchTree::deleteNodesBelowZeroByY() {
     Node* current = root;
@@ -286,10 +274,8 @@ int main() {
     tree.insert(2, 3);
     tree.insert(4, 4);
     tree.print();
-    tree.printHorizontal();
     cout << endl;
-    cout << "Print on level 2" << endl;
-    tree.printOnLevel(2);
+    tree.treeHeight();
     cout << endl;
     cout << "Delete nodes below zero by Y" << endl;
     tree.deleteNodesBelowZeroByY();
@@ -298,8 +284,10 @@ int main() {
     cout << "Delete nodes below zero by X" << endl;
     tree.deleteNodesBelowZeroByX();
     tree.print();
-    tree.treeHeight();
-    tree.preOrder();
+    cout << endl;
+    cout << "Tree height" << endl;
+    cout << tree.treeHeight();
+    cout << endl;
     cout << endl;
     cout << "Print nodes with Y above zero" << endl;
     tree.printYaboveZero();
