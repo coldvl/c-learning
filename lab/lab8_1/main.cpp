@@ -10,7 +10,20 @@ struct Node {
   Node* parent;
    Node(float x, float y) : data_x(x), data_y(y), left(nullptr), right(nullptr) {}
 };
+ 
+ //create a function to print the tree using template
+template <typename T>
+void printTree(Node* node, T outputF) {
+  if (node == nullptr) {
+    return;
+  }
+  printTree(node->left, outputF);
+  outputF(node);
+  printTree(node->right, outputF);
+}
+ 
  // Define a binary search tree.
+
 class BinarySearchTree {
     private:
         Node *root;
@@ -21,6 +34,7 @@ class BinarySearchTree {
         void print();
         void deleteNode(float x, float y);
         void deleteNodesBelowZeroByY();
+        void deleteNodesBelowZeroByY(Node *node);
         void deleteNodesBelowZeroByX();
         void print(Node *node);
         void printYaboveZero();
@@ -29,6 +43,7 @@ class BinarySearchTree {
         void treeHeight(Node *node);
         void switchToRight(Node *node);
         void switchToLeft(Node *node);
+        Node* getRoot();
         BinarySearchTree();
         ~BinarySearchTree();
 };
@@ -41,33 +56,40 @@ BinarySearchTree::~BinarySearchTree() {
     delete root;
 }
 
+Node* BinarySearchTree::getRoot() {
+    return root;
+}
+
 void BinarySearchTree::insert(float x, float y) {
-    Node *node = new Node(x, y);
+    Node *newNode = new Node(x, y);
     if (root == nullptr) {
-        root = node;
+        root = newNode;
     }
     else {
         Node *current = root;
-        while (true) {
+        while (current != nullptr) {
             if (y < current->data_y) {
                 if (current->left == nullptr) {
-                    //node->parent = current;
-                    current->left = node;
+                    current->left = newNode;
+                    newNode->parent = current;
                     break;
                 }
                 else {
                     current = current->left;
                 }
             }
-            else {
+            else if (y > current->data_y) {
                 if (current->right == nullptr) {
-                    //node->parent = current;
-                    current->right = node;
+                    current->right = newNode;
+                    newNode->parent = current;
                     break;
                 }
                 else {
                     current = current->right;
                 }
+            }
+            else {
+                break;
             }
         }
     }
@@ -121,9 +143,13 @@ void BinarySearchTree::switchToRight(Node *node) {
 
 int BinarySearchTree::treeHeight() {
     Node* current = root;
-    switchToLeft(current);
-    current = root;
-    switchToRight(current);
+        switchToLeft(current);
+        for (int i = 0; i < height; i++) {
+            current = current->parent;
+        }
+        
+        switchToRight(current);   
+    
     
     
     return height;
@@ -208,13 +234,21 @@ void BinarySearchTree::deleteNode(float x, float y) {
     }
 }
 
-
 void BinarySearchTree::deleteNodesBelowZeroByY() {
-    Node* current = root;
-    while (current != nullptr) {
-        if (current->data_y < 0) {
-            deleteNode(current->data_x, current->data_y);
+    deleteNodesBelowZeroByY(root);
+}
+
+/*void BinarySearchTree::deleteNodesBelowZeroByY(Node* node) {
+    if (node != nullptr) {
+        deleteNodesBelowZeroByY(node->left);
+        if (node->data_y < 0) {
+            deleteNode(node->data_x, node->data_y);
         }
+    }
+}*/
+
+void BinarySearchTree::deleteNodesBelowZeroByY(Node* current) {
+    while (current != nullptr) {
         if (current->left != nullptr) {
             if (current->left->data_y < 0) {
                 deleteNode(current->left->data_x, current->left->data_y);
@@ -265,7 +299,7 @@ void BinarySearchTree::deleteNodesBelowZeroByX() {
 int main() {
     BinarySearchTree tree;
 
-    tree.insert(1, -2);
+    tree.insert(1, 0);
     tree.insert(-2, 5);
     tree.insert(10, -4);
     tree.insert(3, 2);
@@ -275,7 +309,10 @@ int main() {
     tree.insert(4, 4);
     tree.print();
     cout << endl;
-    tree.treeHeight();
+    cout << "Print tree using template" << endl;
+    printTree(tree.getRoot(), [](Node* node) { cout << node->data_x << " " << node->data_y << endl; });
+    cout << endl;
+    //tree.treeHeight();
     cout << endl;
     cout << "Delete nodes below zero by Y" << endl;
     tree.deleteNodesBelowZeroByY();
@@ -285,8 +322,8 @@ int main() {
     tree.deleteNodesBelowZeroByX();
     tree.print();
     cout << endl;
-    cout << "Tree height" << endl;
-    cout << tree.treeHeight();
+    //cout << "Tree height" << endl;
+    //cout << tree.treeHeight();
     cout << endl;
     cout << endl;
     cout << "Print nodes with Y above zero" << endl;
